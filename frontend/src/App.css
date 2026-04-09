@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a1628;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #475569;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.feat-card:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-3px);
+}
+
+.fday:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+  transform: scale(1.03);
+}
+
+.gps-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Search Input Wrapper */
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  color: #f1f5f9;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Search Spinner */
+.search-spinner {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(79, 156, 249, 0.3);
+  border-top-color: #4f9cf9;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Suggestions Dropdown */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(26, 42, 72, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: -1px;
+  border-radius: 0 0 16px 16px;
+  backdrop-filter: blur(10px);
+}
+
+.suggestion-item {
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: rgba(79, 156, 249, 0.15);
+}
+
+.suggestion-name {
+  color: #f1f5f9;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.suggestion-address {
+  color: #64748b;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Form Inputs */
+.form-group {
+  margin-bottom: 16px;
+}
+
+input[type='text'],
+input[type='email'],
+textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: #f1f5f9;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+textarea:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Mobile Menu */
+@media (max-width: 700px) {
+  .nav-links {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 15, 30, 0.97);
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 99;
+}
+
+/* Responsive Typography */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input {
+    font-size: 16px;
+  }
+
+  .suggestion-item {
+    padding: 12px 14px;
+  }
+
+  .stat {
+    padding: 12px !important;
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+  }
+}

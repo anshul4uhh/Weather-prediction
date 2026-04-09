@@ -1,0 +1,16 @@
+{
+  "name": "weather-prediction",
+  "version": "1.0.0",
+  "description": "Professional Weather Prediction Website",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && node server.js",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
