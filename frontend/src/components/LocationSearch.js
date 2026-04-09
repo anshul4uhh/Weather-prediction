@@ -71,15 +71,15 @@ const LocationSearch = ({ onSearch, disabled }) => {
       debounceTimer.current = null;
     }
     
-    // Set input to show selected location
-    setSearchInput(suggestion.name);
+    // Set input to show full address for user confirmation
+    setSearchInput(suggestion.display_name);
     
     // Clear UI state immediately
     setSuggestions([]);
     setShowSuggestions(false);
     setLoading(false);
     
-    // Call search immediately with the selected suggestion
+    // Call search with just the location name (not the full address)
     onSearch(suggestion.name);
   };
 
