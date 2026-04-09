@@ -71,6 +71,9 @@ const LocationSearch = ({ onSearch, disabled }) => {
       debounceTimer.current = null;
     }
     
+    // Set input to show selected location
+    setSearchInput(suggestion.name);
+    
     // Clear UI state immediately
     setSuggestions([]);
     setShowSuggestions(false);
@@ -91,7 +94,7 @@ const LocationSearch = ({ onSearch, disabled }) => {
     
     if (searchInput.trim()) {
       onSearch(searchInput);
-      setSearchInput('');
+      // Keep the search value in input bar (don't clear it)
       setSuggestions([]);
       setShowSuggestions(false);
       setLoading(false);
