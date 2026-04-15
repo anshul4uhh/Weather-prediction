@@ -27,12 +27,10 @@ const LocationSearch = ({ onSearch, disabled, apiUrl = 'http://localhost:5000' }
 
     try {
       setLoading(true);
-      console.log('Fetching suggestions from:', `${apiUrl}/api/search/suggestions`);
       const response = await axios.get(
         `${apiUrl}/api/search/suggestions`,
         { params: { q: query } }
       );
-      console.log('API Response:', response.data);
       setSuggestions(response.data);
       setShowSuggestions(true);
     } catch (error) {
