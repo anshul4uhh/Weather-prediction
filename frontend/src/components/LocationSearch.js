@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-const LocationSearch = ({ onSearch, disabled }) => {
+const LocationSearch = ({ onSearch, disabled, apiUrl = 'http://localhost:5000' }) => {
   const [searchInput, setSearchInput] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -28,7 +28,7 @@ const LocationSearch = ({ onSearch, disabled }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/search/suggestions`,
+        `${apiUrl}/api/search/suggestions`,
         { params: { q: query } }
       );
       setSuggestions(response.data);
