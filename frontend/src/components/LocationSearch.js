@@ -72,7 +72,12 @@ const LocationSearch = ({ onSearch, disabled, apiUrl = 'http://localhost:5000' }
     }
     
     // Set input to show full address for user confirmation
-    setSearchInput(suggestion.display_name);
+    // Use display_name if available, otherwise fallback to name
+    const displayText = suggestion.display_name && suggestion.display_name.trim() 
+      ? suggestion.display_name 
+      : suggestion.name;
+    
+    setSearchInput(displayText);
     
     // Clear UI state immediately
     setSuggestions([]);
