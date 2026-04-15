@@ -372,8 +372,64 @@ app.get('/api/search/suggestions', async (req, res) => {
   }
 });
 
+// Health check endpoint - returns basic server status
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running' });
+  res.json({ 
+    status: 'Server is running',
+    port: PORT,
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Test endpoint - verifies all APIs are accessible
+app.get('/api/test', async (req, res) => {
+  try {
+    const testResults = {
+      backend: 'OK',
+      nominatim: 'Testing...',
+      openMeteo: 'Testing...',
+      timestamp: new Date().toISOString()
+    };
+
+    // Test Nominatim API
+    try {
+      await throttleNominatimRequest();
+      const nominatimResponse = await axios.get(
+        'https://nominatim.openstreetmap.org/search',
+        {
+          params: { q: 'London', format: 'json', limit: 1 },
+          headers: { 'User-Agent': 'Mozilla/5.0 WeatherApp/1.0' },
+          timeout: 5000
+        }
+      );
+      testResults.nominatim = nominatimResponse.data.length > 0 ? 'OK' : 'No results';
+    } catch (err) {
+      testResults.nominatim = `Error: ${err.message}`;
+    }
+
+    // Test Open-Meteo API
+    try {
+      const meteoResponse = await axios.get(
+        'https://api.open-meteo.com/v1/forecast',
+        {
+          params: {
+            latitude: 51.5074,
+            longitude: -0.1278,
+            current: 'temperature_2m',
+            timezone: 'auto'
+          },
+          timeout: 5000
+        }
+      );
+      testResults.openMeteo = meteoResponse.data.current ? 'OK' : 'No data';
+    } catch (err) {
+      testResults.openMeteo = `Error: ${err.message}`;
+    }
+
+    res.json(testResults);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(PORT, () => {
