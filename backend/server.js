@@ -6,7 +6,19 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Enable CORS with specific configuration for production
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5000',
+    /\.onrender\.com$/,  // Allow all Render URLs
+    /^https?:\/\/.+\.vercel\.app$/,  // Allow Vercel deployments
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(express.json());
 
 // Simple in-memory cache for suggestions (expires after 5 minutes)
