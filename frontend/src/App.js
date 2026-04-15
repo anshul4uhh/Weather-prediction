@@ -24,13 +24,38 @@ const STEPS = [
 ];
 
 function getTheme(weatherCode) {
-  if (!weatherCode) return { bg: '#0f1628', card: 'rgba(79,156,249,0.1)', accent: '#4f9cf9' };
+  if (!weatherCode && weatherCode !== 0) return { bg: '#0f1628', card: 'rgba(79,156,249,0.1)', accent: '#4f9cf9' };
   const code = parseInt(weatherCode);
-  if (code === 0 || code === 1) return { bg: '#0a1628', card: 'rgba(79,156,249,0.1)', accent: '#fbbf24' };
-  if (code >= 80) return { bg: '#0f172a', card: 'rgba(59,130,246,0.1)', accent: '#60a5fa' };
-  if (code >= 70) return { bg: '#1a0a2e', card: 'rgba(167,139,250,0.1)', accent: '#a78bfa' };
-  if (code >= 60) return { bg: '#0d1b35', card: 'rgba(147,197,253,0.1)', accent: '#bae6fd' };
-  if (code >= 50) return { bg: '#1e1e2e', card: 'rgba(148,163,184,0.1)', accent: '#94a3b8' };
+  
+  // Check weather codes in the correct order (WMO codes)
+  // Thunderstorm (95-99) - highest priority, most dramatic
+  if (code >= 95) return { bg: '#0d0a1f', card: 'rgba(139,92,246,0.1)', accent: '#c084fc' };
+  
+  // Rain Showers (80-82)
+  if (code >= 80 && code <= 82) return { bg: '#0f172a', card: 'rgba(59,130,246,0.1)', accent: '#60a5fa' };
+  
+  // Snow Showers (85-86)
+  if (code >= 85 && code <= 86) return { bg: '#1a0f2e', card: 'rgba(168,85,247,0.1)', accent: '#d8b4fe' };
+  
+  // Rain (61-65)
+  if (code >= 61 && code <= 65) return { bg: '#0d1b35', card: 'rgba(147,197,253,0.1)', accent: '#bae6fd' };
+  
+  // Snow (71-77)
+  if (code >= 71 && code <= 77) return { bg: '#1a0a2e', card: 'rgba(167,139,250,0.1)', accent: '#a78bfa' };
+  
+  // Drizzle (51-55)
+  if (code >= 51 && code <= 55) return { bg: '#1e1e2e', card: 'rgba(148,163,184,0.1)', accent: '#94a3b8' };
+  
+  // Fog (45, 48)
+  if (code === 45 || code === 48) return { bg: '#1e293b', card: 'rgba(100,116,139,0.1)', accent: '#cbd5e1' };
+  
+  // Cloudy (2-3)
+  if (code >= 2 && code <= 3) return { bg: '#1a1f35', card: 'rgba(100,150,200,0.1)', accent: '#93c5fd' };
+  
+  // Clear/Sunny (0-1)
+  if (code === 0 || code === 1) return { bg: '#0a1628', card: 'rgba(255,193,7,0.1)', accent: '#fbbf24' };
+  
+  // Default fallback
   return { bg: '#0f1628', card: 'rgba(255,255,255,0.07)', accent: '#4f9cf9' };
 }
 
