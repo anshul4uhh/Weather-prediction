@@ -254,7 +254,7 @@ function App() {
           </h1>
           <p style={S.subtitle}>Real-time forecasts, 10-day outlooks, and precise data — all in one beautifully designed experience.</p>
 
-          <LocationSearch onSearch={handleLocationSearch} disabled={loading} />
+          <LocationSearch onSearch={handleLocationSearch} disabled={loading} apiUrl={API_URL} />
 
           <button className="gps-btn" style={S.gpsBtn} onClick={handleGPS} disabled={loading}>
             <span>📍</span> Use My Current Location
