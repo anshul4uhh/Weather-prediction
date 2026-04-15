@@ -348,7 +348,10 @@ app.get('/api/search/suggestions', async (req, res) => {
 
     const suggestions = response.data.map(location => ({
       name: location.name,
-      display_name: location.display_name,
+      // Use display_name if available, otherwise construct from name + address components
+      display_name: location.display_name && location.display_name.trim() 
+        ? location.display_name 
+        : `${location.name}${location.address?.country ? ', ' + location.address.country : ''}`,
       latitude: parseFloat(location.lat),
       longitude: parseFloat(location.lon)
     }));
