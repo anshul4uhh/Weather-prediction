@@ -65,10 +65,6 @@ const LocationSearch = ({ onSearch, disabled, apiUrl = 'http://localhost:5000' }
   };
 
   const handleSuggestionClick = (suggestion) => {
-    console.log('Suggestion clicked:', suggestion);
-    console.log('Display name:', suggestion.display_name);
-    console.log('Name:', suggestion.name);
-    
     // Clear any pending debounce timer immediately
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
@@ -81,7 +77,6 @@ const LocationSearch = ({ onSearch, disabled, apiUrl = 'http://localhost:5000' }
       ? suggestion.display_name 
       : suggestion.name;
     
-    console.log('Setting input to:', displayText);
     setSearchInput(displayText);
     
     // Clear UI state immediately
