@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import LocationSearch from './components/LocationSearch';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_URL = 'https://weather-prediction-xrn5.onrender.com';
 
 const NAV_LINKS = ['Home', 'Features', 'How It Works', 'Forecast', 'Contact'];
 
